@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*
 
 from arq import arquivoExiste
+import sys
 
 def main():
     nomeArquivo = "_arquivo.data"

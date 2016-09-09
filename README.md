@@ -1,3 +1,3 @@
-## Trabalho de Estrtura de Dados e Algoritmos II
+#Trabalho de Estrtura de Dados e Algoritmos II
 
-*by Antonio Santana
+**by Antonio Santana
