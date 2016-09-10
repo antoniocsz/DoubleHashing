@@ -2,10 +2,14 @@
 # -*- coding: utf-8 -*
 
 from struct import *
+import run as func
+import arrray
 import os
 
+
+
 # Subfunções
-def iniciaArquivo(nome_arquivo, parametro_abertura, posicao):
+def iniciar(nome_arquivo, parametro_abertura, posicao):
     ''' Inicializa o arquivo. '''
     with open(nome_arquivo, parametro_abertura) as arquivo:
         reg = pack("f20sffc",float(-1),"vazio".encode('utf-8'),-1.0,-1.0,'\n')
@@ -13,36 +17,36 @@ def iniciaArquivo(nome_arquivo, parametro_abertura, posicao):
         arquivo.write(reg)
 
 
-def escreverArquivo(nome_arquivo, registro, posicao):
+def escrever(nome_arquivo, registro, posicao):
     ''' Escreve no arquivo. '''
     with open(nome_arquivo, 'r+b') as arquivo:
         arquivo.seek(posicao, 0)
         arquivo.write(registro)
 
 
-def arquivoExiste(nome_arquivo):
+def existe(nome_arquivo):
     ''' Verifica se o arquivo existe e retorna um valor booleano'''
     return os.path.exists(nome_arquivo)
 
 
 # FunçõesPrincipais
-def inserir(registro, nome_arquivo, posicao, TAMANHO):
-    ''' Insere o registro no arquivo, inicializa o arquivo.'''
-    if arquivoExiste(nome_arquivo):
-        escreverArquivo(registro, nome_arquivo, posicao)
+def inserirRegistro(registro, nome_arquivo, posicao, TAMANHO):
+    ''' Insere o registro no arquivo e/ou inicia um arquivo.'''
+    if existe(nome_arquivo):
+        escrever(registro, nome_arquivo, posicao)
     else:
         for i in range(TAMANHO):
             if i != 0:
-                iniciaArquivo(nome_arquivo, 'r+b', i)
+                iniciar(nome_arquivo, 'r+b', i)
             else:
-                iniciaArquivo(nome_arquivo, 'wb', i)
-        escreverArquivo(registro, nome_arquivo, posicao)
+                iniciar(nome_arquivo, 'wb', i)
+        escrever(registro, nome_arquivo, posicao)
     return True
 
 
-def consultar():
+def consultarRegistro():
     pass
 
 
-def deletar():
+def deletarRegistro():
     pass
