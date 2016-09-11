@@ -1,52 +1,36 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*
 
+
 from struct import *
 import run as func
-import arrray
 import os
 
 
-
-# Subfunções
-def iniciar(nome_arquivo, parametro_abertura, posicao):
-    ''' Inicializa o arquivo. '''
-    with open(nome_arquivo, parametro_abertura) as arquivo:
-        reg = pack("f20sffc",float(-1),"vazio".encode('utf-8'),-1.0,-1.0,'\n')
-        arquivo.seek(posicao*len(reg), 0)
-        arquivo.write(reg)
+''' Funções auxiliadoras '''
+def isFile(namefile):
+     ''' Verifica se o arquivo existe e retorna um valor booleano'''
+    return  os.path.exists(namefile)
 
 
-def escrever(nome_arquivo, registro, posicao):
+def escrever_arquivo(namefile, opcao, registro, posicao):
     ''' Escreve no arquivo. '''
-    with open(nome_arquivo, 'r+b') as arquivo:
+    with open(namefile, opcao) as arquivo:
         arquivo.seek(posicao, 0)
         arquivo.write(registro)
 
 
-def existe(nome_arquivo):
-    ''' Verifica se o arquivo existe e retorna um valor booleano'''
-    return os.path.exists(nome_arquivo)
-
-
-# FunçõesPrincipais
-def inserirRegistro(registro, nome_arquivo, posicao, TAMANHO):
+''' Funçoes Principais'''
+def gravar_arquivo(namefile, TAM, registro=0, posicao=0):
     ''' Insere o registro no arquivo e/ou inicia um arquivo.'''
-    if existe(nome_arquivo):
-        escrever(registro, nome_arquivo, posicao)
+    if isFile(namefile):
+        escrever_arquivo(namefile, "r+b", registro, posicao)
     else:
-        for i in range(TAMANHO):
+        for i in range(TAM):
+            reg = pack("i20sic", 0, "vazio".encode('utf-8'), 0, '\n'.encode('utf-8'))
             if i != 0:
-                iniciar(nome_arquivo, 'r+b', i)
+                escrever_arquivo(namefile, "r+b", reg, i*len(reg))
             else:
-                iniciar(nome_arquivo, 'wb', i)
-        escrever(registro, nome_arquivo, posicao)
+                escrever_arquivo(namefile, "wb", reg, i*len(reg))
+        escrever_arquivo(namefile, "r+b", reg, posicao)
     return True
-
-
-def consultarRegistro():
-    pass
-
-
-def deletarRegistro():
-    pass
