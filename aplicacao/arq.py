@@ -3,13 +3,14 @@
 
 
 from struct import *
+import pickle
 import run as func
 import os
 
 
 # Funções auxiliadoras
 def isFile(namefile):
-     ''' Verifica se o arquivo existe e retorna um valor booleano'''
+    ''' Verifica se o arquivo existe e retorna um valor booleano'''
     return  os.path.exists(namefile)
 
 

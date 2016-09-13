@@ -5,41 +5,43 @@ import arq
 import os
 
 
-def h1(TAM, chave):
-    '''Retorna o resto da divisão da chave pelo tamanho.'''
-    return (chave % TAM)
+def doubleHashing(chave, i, tamanho):
+    '''Calcula o DoubleHashing, usando a definição: h(c,i) = [h1(c)+i*h2(c)] mod m'''
+    h1 = chave % tamanho
+    h2 = chave // tamanho
+    if h2 is 0:
+        h2 = 1
+    return ((h1 + i * h2) % tamanho)
 
 
-def h2(TAM, chave):
-    ''' Retorna o quociente da divisão da chave pelo tamanho.'''
-    return (chave // TAM)
+def insere_registro(namefile, tamanho):
+    chave = int(input())
+    nome = input()
+    idade = int(input())
 
-
-def funcao_hashing(chave, tentativas, TAM):
-    ''' Calcula o valor do double hashing. H(c, i) = [h1(c) + i * h2(c)] mod m.'''
-    return h1(TAM, h1(TAM, chave) + tentativas * h2(TAM, chave))
-
-
-def insertDoubleHashing(namefile, TAM, chave, nome, idade):
-    tent = 0
-    funcao_hash = funcao_hashing(chave, tent, TAM)
-    pass
+    tentativas = 0
+    return doubleHashing(chave, tentativas, tamanho)
 
 def main():
+    '''Função principal.'''
     TAMANHO_ARQUIVO = 11
     namefile = '_arquivo.dat'
 
-    OPCAO = input()
-    reg = 0
-    if OPCAO == 'i':
-        chave = int(input())
-        nome = input()
-        idade = int(input())
+    opcao = input()
 
-    if arq.gravar_arquivo(namefile, TAMANHO_ARQUIVO):
-        print ('Ocorreu tudo bem')
-    else:
-        print ('Deu merda')
+    if opcao is 'i':
+        print (insere_registro(namefile, TAMANHO_ARQUIVO))
+    elif opcao is 'c':
+        pass
+    elif opcao is 'r':
+        pass
+    elif opcao is 'p':
+        pass
+    elif opcao is 'm':
+        pass
+    elif opcao is 'e':
+        exit()
+
 
 if __name__ == '__main__':
     main()
