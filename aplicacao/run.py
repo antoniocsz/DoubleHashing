@@ -1,7 +1,9 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*
 
+from struct import *
 import arq
+import array
 import os
 
 
@@ -20,12 +22,24 @@ def insere_registro(namefile, tamanho):
     idade = int(input())
 
     tentativas = 0
-    return doubleHashing(chave, tentativas, tamanho)
+    posicao = doubleHashing(chave, tentativas, tamanho)
+    if arq.isFile(namefile):
 
-def main():
+
+def consulta_registro():
+    pass
+
+def remove_registro():
+    pass
+
+def media_acesso():
+    pass
+
+def imprime_registro():
+    pass
+
+def main(namefile, TAMANHO_ARQUIVO):
     '''Função principal.'''
-    TAMANHO_ARQUIVO = 11
-    namefile = '_arquivo.dat'
 
     opcao = input()
 
@@ -44,4 +58,6 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+    TAMANHO_ARQUIVO = 11
+    namefile = '_arquivo.dat'
+    main(namefile, TAMANHO_ARQUIVO)

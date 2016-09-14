@@ -3,7 +3,6 @@
 
 
 from struct import *
-import pickle
 import run as func
 import os
 
