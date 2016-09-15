@@ -3,6 +3,7 @@
 
 
 from struct import *
+import pickle
 import os
 
 
@@ -37,12 +38,14 @@ def gravar_registro(namefile, TAM, registro, posicao):
     else:
         for i in range(TAM):
             reg = compactar()
+            pos = i * len(reg)
             if i != 0:
-                escrever_arquivo(namefile, "r+b", reg, i*len(reg))
+                escrever_arquivo(namefile, "r+b", reg, pos)
             else:
-                escrever_arquivo(namefile, "wb", reg, i*len(reg))
+                escrever_arquivo(namefile, "wb", reg, pos)
         escrever_arquivo(namefile, "r+b", registro, posicao)
     return True
+
 
 
 # def consultar_registro(namefile, chave, posicao, registro, TAM):

@@ -9,7 +9,7 @@ def doubleHashing(chave, tentativas, tamanho):
     h2 = chave // tamanho
     if h2 is 0:
         h2 = 1
-    return ((h1 + tentativas * h2) % tamanho), tentativas+1
+    return ((h1 + tentativas * h2) % tamanho)
 
 
 def main(namefile, tamanho):
@@ -21,8 +21,10 @@ def main(namefile, tamanho):
         chave = int(input())
         nome = input()
         idade =  int(input())
+
         registro = arq.compactar(chave, nome, idade)
         posicao = doubleHashing(chave, 0, tamanho) * len(registro)
+
         arq.gravar_registro(namefile, tamanho, registro, posicao)
 
 
