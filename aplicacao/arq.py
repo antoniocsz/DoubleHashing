@@ -3,7 +3,6 @@
 
 
 from struct import *
-import pickle
 import os
 
 
@@ -47,6 +46,19 @@ def gravar_registro(namefile, TAM, registro, posicao):
     return True
 
 
+def consultar_registro(namefile, TAM , posicao, chave):
+    with open(namefile, 'rb') as arquivo:
+        arquivo.seek(0, 2)
+        conteudo = arquivo.tell()
+        tamanho = conteudo // TAM
+    if arquivoExiste(namefile):
+        with open(namefile, 'rb') as arquivo:
+            arquivo.seek(posicao*tamanho, 0)
+            conteudo = arquivo.read(tamanho)
+            registro = descompactar(conteudo)
+            if chave is int(registro[0]):
+                return registro
+    return None
 
 # def consultar_registro(namefile, chave, posicao, registro, TAM):
 #     with open(namefile,"rb") as arquivo:
@@ -63,7 +75,25 @@ def gravar_registro(namefile, TAM, registro, posicao):
 #     return None
 #
 #
+# def consulta2(namefile, chave, position, registro, TAM):
+#     string = ""
+#     arq = open(namefile,"rb")
+#     arq.seek(0,2)
+#     conteudo = arq.tell()
+#     tam = conteudo/TAM
+#     arq.close()
+#     if isFile(namefile):
+#         arq = open(namefile, 'rb')
+#         arq.seek(position*(tam), 0)
+#         conteudo = arq.read(tam)
+#         registro = unpack("f20sffc",conteudo)
+#         if chave == int(registro[0]):
+#             string = str(int(registro[0]))+" "+(registro[1])+" "+str(int(registro[2]))
+#     arq.close()
+#     return string
+#
+#
 # def remover_registro(namefile, posicao):
 #     '''Reescreve o registro da posição, passando um registro vazio.'''
-#     escrever_arquivo(namefile, "r+b", compactarr(), posicao)
+#     escrever_arquivo(namefile, "r+b", compactar(), posicao)
 #

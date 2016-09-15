@@ -21,11 +21,16 @@ def main(namefile, tamanho):
         chave = int(input())
         nome = input()
         idade =  int(input())
-
         registro = arq.compactar(chave, nome, idade)
         posicao = doubleHashing(chave, 0, tamanho) * len(registro)
-
         arq.gravar_registro(namefile, tamanho, registro, posicao)
+
+    elif opcao is 'c':
+        # recebe a chave ser consultada no arquivo
+        chave = int(input())
+        posicao = doubleHashing(chave, 0, tamanho)
+        registro = arq.consultar_registro(namefile, tamanho, posicao, chave)
+        print (registro)
 
 
 if __name__ == '__main__':
