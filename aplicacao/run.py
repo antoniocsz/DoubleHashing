@@ -32,6 +32,12 @@ def main(namefile, tamanho):
         registro = arq.consultar_registro(namefile, tamanho, posicao, chave)
         print (registro)
 
+    elif opcao is 'r':
+        chave = int(input())
+        posicao = doubleHashing(chave, 0, tamanho)
+        if arq.remover_registro(namefile, posicao):
+            print ('Deletado com sucesso')
+
 
 if __name__ == '__main__':
     TAMANHO_ARQUIVO = 11
