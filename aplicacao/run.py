@@ -41,6 +41,23 @@ def inserir(namefile, tamanho):
                     tentativas += 1
 
 
+def consultar(namefile, tamanho):
+    ''' Função que consulta uma chave no arquivo'''
+    chave = int(input())
+
+    if arq.arquivoExiste(namefile):
+        tentativas = 0
+        while tentativas < tamanho:
+            posicao = doubleHashing(chave, tentativas, tamanho)
+            registro = arq.consultar_registro(namefile, tamanho, posicao, chave)
+            if registro != None:
+                print ('chave: %d\n%s\n%d' %(registro[0], registro[1].decode('utf-8'), registro[2]))
+                break
+            else:
+                tentativas += 1
+        if tentativas is tamanho:
+            print ('chave não encontrada: %d' % chave)
+
 
 def main(namefile, tamanho):
     ''' Programa principal. '''
@@ -48,20 +65,12 @@ def main(namefile, tamanho):
 
     if opcao is 'i':
         inserir(namefile, tamanho)
-        # recebe os valores do registro
-        # chave = int(input())
-        # nome = input()
-        # idade =  int(input())
-        # registro = arq.compactar(chave, nome, idade)
-        # posicao = doubleHashing(chave, 0, tamanho) * len(registro)
-        # arq.gravar_registro(namefile, tamanho, registro, posicao)
-
     elif opcao is 'c':
-        # recebe a chave ser consultada no arquivo
-        chave = int(input())
-        posicao = doubleHashing(chave, 0, tamanho)
-        registro = arq.consultar_registro(namefile, tamanho, posicao, chave)
-        print (registro)
+        consultar(namefile, tamanho)
+        # chave = int(input())
+        # posicao = doubleHashing(chave, 0, tamanho)
+        # registro = arq.consultar_registro(namefile, tamanho, posicao, chave)
+        # print (registro)
 
     elif opcao is 'r':
         chave = int(input())
