@@ -67,11 +67,6 @@ def main(namefile, tamanho):
         inserir(namefile, tamanho)
     elif opcao is 'c':
         consultar(namefile, tamanho)
-        # chave = int(input())
-        # posicao = doubleHashing(chave, 0, tamanho)
-        # registro = arq.consultar_registro(namefile, tamanho, posicao, chave)
-        # print (registro)
-
     elif opcao is 'r':
         chave = int(input())
         posicao = doubleHashing(chave, 0, tamanho)
