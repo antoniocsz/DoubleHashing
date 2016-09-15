@@ -32,10 +32,13 @@ def inserir(namefile, tamanho):
             if arq.buscar_chave(namefile, tamanho, posicaoSort, chave):
                 print ('chave já existente %d' % chave)
                 break
-            elif not arq.verificar_posicao(namefile, tamanho, posicaoSort, chave):
-                tentativas += 1
             else:
-                arq.gravar_registro(namefile, tamanho, registro, posicaoInsert)
+                reg = arq.retorna_registro(namefile, tamanho, posicaoSort, chave)
+                if reg[0] is -1:
+                    arq.gravar_registro(namefile, tamanho, registro, posicaoInsert)
+                    break
+                else:
+                    tentativas += 1
 
 
 
