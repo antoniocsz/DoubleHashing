@@ -62,6 +62,22 @@ def buscar_chave(namefile, TAM , posicao, chave):
     return False
 
 
+def verificar_posicao(namefile, TAM , posicao, chave):
+    ''' Verifica se a chave já existe no arquivo. '''
+    with open(namefile, 'rb') as arquivo:
+        arquivo.seek(0, 2)
+        conteudo = arquivo.tell()
+        tamanho = conteudo // TAM
+    if arquivoExiste(namefile):
+        with open(namefile, 'rb') as arquivo:
+            arquivo.seek(posicao*tamanho, 0)
+            conteudo = arquivo.read(tamanho)
+            registro = descompactar(conteudo)
+            if 'vazio' not in str(registro[1]):
+                return True
+    return False
+
+
 def consultar_registro(namefile, TAM , posicao, chave):
     ''' Verifica se a chave já existe no arquivo. '''
     with open(namefile, 'rb') as arquivo:
