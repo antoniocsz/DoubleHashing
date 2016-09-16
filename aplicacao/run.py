@@ -59,6 +59,24 @@ def consultar(namefile, tamanho):
             print ('chave não encontrada: %d' % chave)
 
 
+def remover(namefile, tamanho):
+    ''' Remove o registro do arquivo. '''
+    chave = int(input())
+
+    if arq.arquivoExiste(namefile):
+        tentativas = 0
+        while tentativas < tamanho:
+            posicao = doubleHashing(chave, tentativas, tamanho)
+            registro = arq.consultar_registro(namefile, tamanho, posicao, chave)
+            if registro != None:
+                arq.remover_registro(namefile, posicao)
+                break
+            else:
+                tentativas += 1
+        if tentativas is tamanho:
+            print ('chave não encontrada: %d' % chave)
+
+
 def main(namefile, tamanho):
     ''' Programa principal. '''
     opcao = input()
@@ -68,10 +86,13 @@ def main(namefile, tamanho):
     elif opcao is 'c':
         consultar(namefile, tamanho)
     elif opcao is 'r':
-        chave = int(input())
-        posicao = doubleHashing(chave, 0, tamanho)
-        if arq.remover_registro(namefile, posicao):
-            print ('Deletado com sucesso')
+        remover(namefile, tamanho)
+    elif opcao is 'p':
+        pass
+    elif opcao is 'm':
+        pass
+    elif opcao is 'e':
+        exit()
 
 
 if __name__ == '__main__':

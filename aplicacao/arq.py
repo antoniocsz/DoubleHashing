@@ -95,4 +95,3 @@ def consultar_registro(namefile, TAM , posicao, chave):
 def remover_registro(namefile, posicao):
     '''Reescreve o registro da posição, passando um registro vazio.'''
     escrever_arquivo(namefile, "r+b", compactar(), posicao*len(compactar()))
-    return True
