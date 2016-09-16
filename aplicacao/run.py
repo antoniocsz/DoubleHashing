@@ -89,7 +89,23 @@ def imprime(namefile, tamanho):
 
 
 def media(namefile, tamanho):
-    pass
+    ''' Calcula a média de acesso dos registros no arquivo. '''
+    media = 0
+    quantidade = 0
+
+    if arq.arquivoExiste(namefile):
+        for posicaoA in range(tamanho):
+            registro = arq.retorna_registro(namefile, tamanho, posicaoA)
+            if registro[0] is not -1:
+                quantidade += 1
+                for posicaoB in range(tamanho):
+                    tentativa = doubleHashing(registro[0], posicaoB, tamanho)
+                    if arq.buscar_chave(namefile, tamanho, tentativa, registro[0]):
+                        media += posicaoB+1
+                        break
+
+    print ('%.1f' % (media / quantidade))
+
 
 
 def main(namefile, tamanho):
@@ -106,7 +122,7 @@ def main(namefile, tamanho):
         elif opcao is 'p':
             imprime(namefile, tamanho)
         elif opcao is 'm':
-            pass
+            media(namefile, tamanho)
         elif opcao is 'e':
             break
 
