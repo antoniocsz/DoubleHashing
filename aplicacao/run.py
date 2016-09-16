@@ -88,22 +88,27 @@ def imprime(namefile, tamanho):
                 print('%d: %d %s %d' % (posicao, registro[0], registro[1].decode('utf-8'), registro[2]))
 
 
+def media(namefile, tamanho):
+    pass
+
+
 def main(namefile, tamanho):
     ''' Programa principal. '''
-    opcao = input()
 
-    if opcao is 'i':
-        inserir(namefile, tamanho)
-    elif opcao is 'c':
-        consultar(namefile, tamanho)
-    elif opcao is 'r':
-        remover(namefile, tamanho)
-    elif opcao is 'p':
-        imprime(namefile, tamanho)
-    elif opcao is 'm':
-        pass
-    elif opcao is 'e':
-        exit()
+    while True:
+        opcao = input()
+        if opcao is 'i':
+            inserir(namefile, tamanho)
+        elif opcao is 'c':
+            consultar(namefile, tamanho)
+        elif opcao is 'r':
+            remover(namefile, tamanho)
+        elif opcao is 'p':
+            imprime(namefile, tamanho)
+        elif opcao is 'm':
+            pass
+        elif opcao is 'e':
+            break
 
 
 if __name__ == '__main__':
