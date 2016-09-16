@@ -29,6 +29,26 @@ def escrever_arquivo(namefile, opcao, registro, posicao):
         arquivo.write(registro)
 
 
+def tamanho_registro(namefile, TAM):
+    ''' Retorna o tamanho de cada registro. '''
+    with open(namefile, 'rb') as arquivo:
+        arquivo.seek(0, 2)
+        conteudo = arquivo.tell()
+        tamanho = conteudo // TAM
+    return tamanho
+
+
+def retorna_registro(namefile, TAM , posicao):
+    ''' Retorna o registro, com base na posição fornecida. '''
+    tamanho = tamanho_registro(namefile, TAM)
+    if arquivoExiste(namefile):
+        with open(namefile, 'rb') as arquivo:
+            arquivo.seek(posicao*tamanho, 0)
+            conteudo = arquivo.read(tamanho)
+            registro = descompactar(conteudo)
+    return registro
+
+
 # Funções Principais
 def gravar_registro(namefile, TAM, registro, posicao):
     ''' Insere o registro no arquivo e/ou inicia um arquivo.'''
@@ -45,52 +65,22 @@ def gravar_registro(namefile, TAM, registro, posicao):
         escrever_arquivo(namefile, "r+b", registro, posicao)
     return True
 
-# Sim há três funções de consulta quase identicas no codigo T-T
-# Mas se eu não esquecer, e tive com tempo vou refatorar-las
 
 def buscar_chave(namefile, TAM , posicao, chave):
     ''' Verifica se a chave já existe no arquivo. '''
-    with open(namefile, 'rb') as arquivo:
-        arquivo.seek(0, 2)
-        conteudo = arquivo.tell()
-        tamanho = conteudo // TAM
     if arquivoExiste(namefile):
-        with open(namefile, 'rb') as arquivo:
-            arquivo.seek(posicao*tamanho, 0)
-            conteudo = arquivo.read(tamanho)
-            registro = descompactar(conteudo)
-            if chave is int(registro[0]):
-                return True
+        registro = retorna_registro(namefile, TAM, posicao)
+        if chave is int(registro[0]):
+            return True
     return False
-
-
-def retorna_registro(namefile, TAM , posicao):
-    ''' Retorna o registro, com base na posição fornecida. '''
-    with open(namefile, 'rb') as arquivo:
-        arquivo.seek(0, 2)
-        conteudo = arquivo.tell()
-        tamanho = conteudo // TAM
-    if arquivoExiste(namefile):
-        with open(namefile, 'rb') as arquivo:
-            arquivo.seek(posicao*tamanho, 0)
-            conteudo = arquivo.read(tamanho)
-            registro = descompactar(conteudo)
-    return registro
 
 
 def consultar_registro(namefile, TAM , posicao, chave):
     ''' Verifica se a chave já existe no arquivo. '''
-    with open(namefile, 'rb') as arquivo:
-        arquivo.seek(0, 2)
-        conteudo = arquivo.tell()
-        tamanho = conteudo // TAM
     if arquivoExiste(namefile):
-        with open(namefile, 'rb') as arquivo:
-            arquivo.seek(posicao*tamanho, 0)
-            conteudo = arquivo.read(tamanho)
-            registro = descompactar(conteudo)
-            if chave is int(registro[0]):
-                return registro
+        registro = retorna_registro(namefile, TAM, posicao)
+        if chave is int(registro[0]):
+            return registro
     return None
 
 
