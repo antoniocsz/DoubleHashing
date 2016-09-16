@@ -16,6 +16,6 @@ $ python3 run.py
 ```
 
 ##Duvidas:
-No arquivo: `arq.py` temos as funções basicas de manimulação de arquivo, enquanto em `run.py` temos as funções do trabalho.
+No arquivo: `arq.py` temos as funções basicas de manipulação de arquivo, enquanto em `run.py` temos as funções do trabalho.
 
 by: Antonio Santana
