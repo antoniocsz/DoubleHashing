@@ -33,7 +33,7 @@ def inserir(namefile, tamanho):
                 print ('chave já existente %d' % chave)
                 break
             else:
-                reg = arq.retorna_registro(namefile, tamanho, posicaoSort, chave)
+                reg = arq.retorna_registro(namefile, tamanho, posicaoSort)
                 if reg[0] is -1:
                     arq.gravar_registro(namefile, tamanho, registro, posicaoInsert)
                     break
@@ -77,6 +77,17 @@ def remover(namefile, tamanho):
             print ('chave não encontrada: %d' % chave)
 
 
+def imprime(namefile, tamanho):
+    ''' Imprime a tabela toda. '''
+    if arq.arquivoExiste(namefile):
+        for posicao in range(tamanho):
+            registro = arq.retorna_registro(namefile, tamanho, posicao)
+            if registro[0] is -1:
+                print('%d: vazio' % posicao)
+            else:
+                print('%d: %d %s %d' % (posicao, registro[0], registro[1].decode('utf-8'), registro[2]))
+
+
 def main(namefile, tamanho):
     ''' Programa principal. '''
     opcao = input()
@@ -88,7 +99,7 @@ def main(namefile, tamanho):
     elif opcao is 'r':
         remover(namefile, tamanho)
     elif opcao is 'p':
-        pass
+        imprime(namefile, tamanho)
     elif opcao is 'm':
         pass
     elif opcao is 'e':

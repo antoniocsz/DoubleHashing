@@ -45,6 +45,8 @@ def gravar_registro(namefile, TAM, registro, posicao):
         escrever_arquivo(namefile, "r+b", registro, posicao)
     return True
 
+# Sim há três funções de consulta quase identicas no codigo T-T
+# Mas se eu não esquecer, e tive com tempo vou refatorar-las
 
 def buscar_chave(namefile, TAM , posicao, chave):
     ''' Verifica se a chave já existe no arquivo. '''
@@ -62,8 +64,8 @@ def buscar_chave(namefile, TAM , posicao, chave):
     return False
 
 
-def retorna_registro(namefile, TAM , posicao, chave):
-    ''' Verifica se a chave já existe no arquivo. '''
+def retorna_registro(namefile, TAM , posicao):
+    ''' Retorna o registro, com base na posição fornecida. '''
     with open(namefile, 'rb') as arquivo:
         arquivo.seek(0, 2)
         conteudo = arquivo.tell()
