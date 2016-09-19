@@ -130,4 +130,15 @@ def main(namefile, tamanho):
 if __name__ == '__main__':
     TAMANHO_ARQUIVO = 11
     ARQUIVO = 'arquivo.dat'
+
+    if not arq.arquivoExiste(ARQUIVO):
+        for i in range(TAMANHO_ARQUIVO):
+            reg = arq.compactar()
+            pos = i * len(reg)
+            if i != 0:
+                arq.escrever_arquivo(ARQUIVO, "r+b", reg, pos)
+            else:
+                arq.escrever_arquivo(ARQUIVO, "wb", reg, pos)
+
+
     main(ARQUIVO, TAMANHO_ARQUIVO)
