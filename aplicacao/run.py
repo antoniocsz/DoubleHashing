@@ -104,7 +104,7 @@ def media(namefile, tamanho):
                         media += posicaoB+1
                         break
 
-    print ('%.1f' % (media / quantidade))
+    print ('%.1f' % (media / quantidade) if quantidade > 0 else 0)
 
 
 

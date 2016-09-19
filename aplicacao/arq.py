@@ -54,15 +54,6 @@ def gravar_registro(namefile, TAM, registro, posicao):
     ''' Insere o registro no arquivo e/ou inicia um arquivo.'''
     if arquivoExiste(namefile):
         escrever_arquivo(namefile, "r+b", registro, posicao)
-    # else:
-    #     for i in range(TAM):
-    #         reg = compactar()
-    #         pos = i * len(reg)
-    #         if i != 0:
-    #             escrever_arquivo(namefile, "r+b", reg, pos)
-    #         else:
-    #             escrever_arquivo(namefile, "wb", reg, pos)
-    #     escrever_arquivo(namefile, "r+b", registro, posicao)
     return True
 
 
