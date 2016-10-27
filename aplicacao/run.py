@@ -1,5 +1,6 @@
 # -*- encoding: utf-8 -*-
 import arq
+import string
 
 def doubleHashing(chave, tentativas, tamanho):
     ''' Função Hashing. '''
@@ -78,8 +79,10 @@ def remover(namefile, tamanho):
 
 def codifica(frase):
     palavra = ''
+    alfabeto = string.ascii_letters +' '
     for caracter in frase.strip():
-        if caracter != '\x00':
+        if caracter in alfabeto:
+        #if caracter != '\x00':
             palavra += caracter
     letras = palavra.strip("'")
     return letras
