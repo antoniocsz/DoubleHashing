@@ -1,6 +1,4 @@
-#!/usr/bin/env python
-# -*- coding: utf-8 -*
-
+# -*- encoding: utf-8 -*-
 import arq
 
 def doubleHashing(chave, tentativas, tamanho):
@@ -17,6 +15,7 @@ def inserir(namefile, tamanho):
 
     chave = int(input())
     nome = input()
+    nome = nome.rstrip()
     idade =  int(input())
 
     registro = arq.compactar(chave, nome, idade)
@@ -30,7 +29,7 @@ def inserir(namefile, tamanho):
             posicaoSort = doubleHashing(chave, tentativas, tamanho)
             posicaoInsert = posicaoSort * len(registro)
             if arq.buscar_chave(namefile, tamanho, posicaoSort, chave):
-                print ('chave já existente %d' % chave)
+                print ('chave já existente {}'.format(chave))
                 break
             else:
                 reg = arq.retorna_registro(namefile, tamanho, posicaoSort)
@@ -51,12 +50,12 @@ def consultar(namefile, tamanho):
             posicao = doubleHashing(chave, tentativas, tamanho)
             registro = arq.consultar_registro(namefile, tamanho, posicao, chave)
             if registro != None:
-                print ('chave: %d\n%s\n%d' %(registro[0], registro[1].decode('utf-8'), registro[2]))
+                print('chave: {}\n{}\n{}'.format(registro[0], codifica(registro[1].decode('utf-8')), registro[2]))
                 break
             else:
                 tentativas += 1
         if tentativas is tamanho:
-            print ('chave não encontrada: %d' % chave)
+            print ('chave não encontrada: {}'.format(chave))
 
 
 def remover(namefile, tamanho):
@@ -74,7 +73,16 @@ def remover(namefile, tamanho):
             else:
                 tentativas += 1
         if tentativas is tamanho:
-            print ('chave não encontrada: %d' % chave)
+            print ('chave não encontrada: {}'.formt(chave))
+
+
+def codifica(frase):
+    palavra = ''
+    for caracter in frase.strip():
+        if caracter != '\x00':
+            palavra += caracter
+    letras = palavra.strip("'")
+    return letras
 
 
 def imprime(namefile, tamanho):
@@ -83,9 +91,9 @@ def imprime(namefile, tamanho):
         for posicao in range(tamanho):
             registro = arq.retorna_registro(namefile, tamanho, posicao)
             if registro[0] is -1:
-                print('%d: vazio' % posicao)
+                print('{}: vazio'.format(posicao))
             else:
-                print('%d: %d %s %d' % (posicao, registro[0], registro[1].decode('utf-8'), registro[2]))
+                print ('{}: {} {} {}'.format(posicao, registro[0], codifica(registro[1].decode('utf-8')), registro[2]))
 
 
 def media(namefile, tamanho):
@@ -113,6 +121,7 @@ def main(namefile, tamanho):
 
     while True:
         opcao = input()
+        opcao = opcao.rstrip()
         if opcao is 'i':
             inserir(namefile, tamanho)
         elif opcao is 'c':

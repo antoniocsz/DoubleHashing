@@ -1,7 +1,4 @@
-#!/usr/bin/env python
-# -*- coding: utf-8 -*
-
-
+# -*- encoding: utf-8 -*-
 from struct import *
 import os
 
